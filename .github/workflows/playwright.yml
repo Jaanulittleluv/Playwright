@@ -10,6 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+    - name: Create dummy email config
+      run: |
+        echo "export const emailConfig = {
+          serviceId: '${{ secrets.EMAILJS_SERVICE_ID }}',
+          templateId: '${{ secrets.EMAILJS_TEMPLATE_ID }}',
+          publicKey: '${{ secrets.EMAILJS_PUBLIC_KEY }}'
+        };" > src/app/email.config.ts
     - uses: actions/setup-node@v4
       with:
         node-version: lts/*
